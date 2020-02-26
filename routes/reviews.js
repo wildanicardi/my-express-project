@@ -3,7 +3,7 @@ const router = express.Router({
   mergeParams: true
 });
 
-/* GET reviews page. /posts/:id/reviews*/
+/* GET reviews page. /posts/:id/reviews */
 router.get('/', (req, res, next) => {
   res.send('INDEX /posts/:id/reviews');
 });
