@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const {postRegister,} = require('../controllers/IndexControllers');
+const {
+  postRegister,
+  postLogin,
+  getLogout
+} = require('../controllers');
+const {
+  asyncErrorHandler
+} = require('../middleware');
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index', {
@@ -9,50 +16,49 @@ router.get('/', (req, res, next) => {
 });
 
 /* GET /register */
-router.get('/register', (req, res, next) => {
+router.get('/api/register', (req, res, next) => {
   res.send('GET /register');
 });
 
 /* POST /register */
-router.post('/register', postRegister);
+router.post('/api/register', asyncErrorHandler(postRegister));
 
 /* GET /login */
-router.get('/login', (req, res, next) => {
+router.get('/api/login', (req, res, next) => {
   res.send('GET /login');
 });
 
 /* POST /login */
-router.post('/login', (req, res, next) => {
-  res.send('POST /login');
-});
-
+router.post('/api/login', postLogin);
+/* GET /logout */
+router.get('/api/logout', getLogout);
 /* GET /profile */
-router.get('/profile', (req, res, next) => {
+router.get('/api/profile', (req, res, next) => {
   res.send('GET /profile');
 });
 
 /* PUT /profile/:user_id */
-router.put('/profile/:user_id', (req, res, next) => {
+router.put('/api/profile/:user_id', (req, res, next) => {
   res.send('PUT /profile/:user_id');
 });
 
 /* GET /forgot */
-router.get('/forgot', (req, res, next) => {
+router.get('/api/forgot', (req, res, next) => {
   res.send('GET /forgot');
 });
 
 /* PUT /forgot */
-router.put('/forgot', (req, res, next) => {
+router.put('/api/forgot', (req, res, next) => {
   res.send('PUT /forgot');
 });
 
 /* GET /reset */
-router.get('/reset/:token', (req, res, next) => {
+router.get('/api/reset/:token', (req, res, next) => {
   res.send('GET /reset/:token');
 });
 
 /* PUT /reset */
-router.put('/reset/:token', (req, res, next) => {
+router.put('/api/reset/:token', (req, res, next) => {
   res.send('PUT /reset/:token');
 });
 
